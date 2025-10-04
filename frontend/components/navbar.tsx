@@ -5,7 +5,7 @@ export default function Navbar() {
     const router = useRouter()
 
     return (
-        <nav className='flex flex-col space-y-2' aria-label="Main navigation">
+        <nav className='min-h-screen flex flex-col space-y-2' aria-label="Main navigation">
             <Link
                 href='/'
                 aria-current={router.pathname === '/' ? 'page' : undefined}
