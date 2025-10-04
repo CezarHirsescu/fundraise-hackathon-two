@@ -4,12 +4,10 @@ import OpenAI from "openai";
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export const initTranscriptWatcher = () => {
-  console.log("🔍 Initializing Transcript Watcher...");
 
   const changeStream = Transcript.watch();
 
   changeStream.on("change", async (change) => {
-    console.log("📝 Transcript change detected:", change.operationType);
     try {
       let shouldProcess = false;
       let docId;
@@ -20,7 +18,7 @@ export const initTranscriptWatcher = () => {
         if (updatedFields?.status === "completed") {
           shouldProcess = true;
           docId = change.documentKey._id;
-          console.log(`✅ Transcript ${docId} status changed to 'completed'`);
+          console.log(`Transcript ${docId} status changed to 'completed'`);
         }
       }
 
@@ -28,7 +26,7 @@ export const initTranscriptWatcher = () => {
       if (change.operationType === "insert" && change.fullDocument?.status === "completed") {
         shouldProcess = true;
         docId = change.fullDocument._id;
-        console.log(`✅ Transcript ${docId} inserted with 'completed' status`);
+        console.log(`Transcript ${docId} inserted with 'completed' status`);
       }
 
       if (!shouldProcess) return;
@@ -44,8 +42,6 @@ export const initTranscriptWatcher = () => {
         console.log(`⚠️ Transcript ${docId} has no transcriptText, skipping summarization.`);
         return;
       }
-
-      console.log(`🤖 Calling OpenAI to summarize transcript ${docId}...`);
 
       // Call OpenAI to summarize
       const response = await openai.chat.completions.create({
