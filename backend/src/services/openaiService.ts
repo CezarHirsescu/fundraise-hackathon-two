@@ -70,6 +70,45 @@ Be specific, actionable, and concise. Use bullet points. Maximum 700 words.`,
 	}
 
 	/**
+	 * Extract participant names from a meeting transcript
+	 */
+	async extractParticipants(transcript: string): Promise<string[]> {
+		try {
+			console.log("🤖 Extracting participants with AI...")
+
+			const { text } = await generateText({
+				model: openai(this.model),
+				system: `You are an expert at extracting participant names from meeting transcripts.
+
+Extract all unique participant names and return them as a JSON array of strings.
+
+Return only valid JSON in this exact format:
+{
+  "participants": ["Name 1", "Name 2", "Name 3"]
+}
+
+Rules:
+- Extract full names when available
+- Remove duplicates
+- Use proper capitalization
+- If no participants are clearly identified, return an empty array
+- Return only the JSON, no additional text`,
+				prompt: `Extract participant names from this meeting transcript:\n\n${transcript}`,
+			})
+
+			// Parse the JSON response
+			const parsed = JSON.parse(text.trim()) as { participants: string[] }
+
+			console.log(`✅ Extracted ${parsed.participants.length} participants`)
+			return parsed.participants
+		} catch (error: any) {
+			console.error("Error extracting participants:", error.message)
+			// Return empty array on error instead of throwing
+			return []
+		}
+	}
+
+	/**
 	 * Extract action items from a meeting transcript with priority levels
 	 */
 	async extractActionItems(transcript: string): Promise<ExtractedActionItem[]> {
