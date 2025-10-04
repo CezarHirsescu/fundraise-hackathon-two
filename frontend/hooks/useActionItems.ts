@@ -1,5 +1,4 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
-import { queryKeys } from "@/lib/queryKeys"
 import {
 	getActionItems,
 	getActionItemById,
@@ -21,7 +20,7 @@ import type {
  */
 export function useActionItems(filters?: ActionItemFilters) {
 	return useQuery({
-		queryKey: queryKeys.actionItems.list(filters),
+		queryKey: ["action-items", filters],
 		queryFn: () => getActionItems(filters),
 	})
 }
@@ -31,7 +30,7 @@ export function useActionItems(filters?: ActionItemFilters) {
  */
 export function useActionItem(id: string) {
 	return useQuery({
-		queryKey: queryKeys.actionItems.detail(id),
+		queryKey: ["action-items", id],
 		queryFn: () => getActionItemById(id),
 		enabled: !!id, // Only run if ID is provided
 	})
@@ -42,7 +41,7 @@ export function useActionItem(id: string) {
  */
 export function useActionItemsByMeeting(meetingId: string) {
 	return useQuery({
-		queryKey: queryKeys.actionItems.byMeeting(meetingId),
+		queryKey: ["action-items", "meeting", meetingId],
 		queryFn: () => getActionItemsByMeeting(meetingId),
 		enabled: !!meetingId, // Only run if meetingId is provided
 	})
@@ -53,7 +52,7 @@ export function useActionItemsByMeeting(meetingId: string) {
  */
 export function useActionItemStats(meetingId?: string) {
 	return useQuery({
-		queryKey: queryKeys.actionItems.stats(meetingId),
+		queryKey: ["action-items", "stats", meetingId],
 		queryFn: () => getActionItemStats(meetingId),
 	})
 }
@@ -69,13 +68,7 @@ export function useCreateActionItem() {
 		onSuccess: (newActionItem) => {
 			// Invalidate action items lists and meeting-specific lists
 			queryClient.invalidateQueries({
-				queryKey: queryKeys.actionItems.lists(),
-			})
-			queryClient.invalidateQueries({
-				queryKey: queryKeys.actionItems.byMeeting(newActionItem.meetingId as string),
-			})
-			queryClient.invalidateQueries({
-				queryKey: queryKeys.actionItems.stats(),
+				queryKey: ["action-items"],
 			})
 		},
 	})
@@ -93,16 +86,7 @@ export function useUpdateActionItem() {
 		onSuccess: (updatedActionItem) => {
 			// Invalidate specific action item and lists
 			queryClient.invalidateQueries({
-				queryKey: queryKeys.actionItems.detail(updatedActionItem._id),
-			})
-			queryClient.invalidateQueries({
-				queryKey: queryKeys.actionItems.lists(),
-			})
-			queryClient.invalidateQueries({
-				queryKey: queryKeys.actionItems.byMeeting(updatedActionItem.meetingId as string),
-			})
-			queryClient.invalidateQueries({
-				queryKey: queryKeys.actionItems.stats(),
+				queryKey: ["action-items", updatedActionItem._id],
 			})
 		},
 	})
@@ -119,13 +103,7 @@ export function useDeleteActionItem() {
 		onSuccess: (_, deletedId) => {
 			// Remove from cache and invalidate lists
 			queryClient.removeQueries({
-				queryKey: queryKeys.actionItems.detail(deletedId),
-			})
-			queryClient.invalidateQueries({
-				queryKey: queryKeys.actionItems.lists(),
-			})
-			queryClient.invalidateQueries({
-				queryKey: queryKeys.actionItems.stats(),
+				queryKey: ["action-items"],
 			})
 		},
 	})

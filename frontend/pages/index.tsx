@@ -1,14 +1,9 @@
 import Head from "next/head"
 import { MeetingCard } from "@/components/meetingCard"
 import { useMeetings } from "@/hooks/useMeetings"
-import { useEffect } from "react"
 
 export default function Home() {
 	const { data: meetings, isLoading, error } = useMeetings()
-
-  useEffect(() => {
-    console.log("Error:", error)
-  }, [error])
 
 	return (
 		<>

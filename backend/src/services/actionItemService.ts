@@ -1,5 +1,4 @@
 import ActionItem, { IActionItem } from "../models/ActionItem"
-import Meeting from "../models/Meeting"
 import mongoose from "mongoose"
 
 interface ActionItemFilters {
@@ -179,12 +178,6 @@ class ActionItemService {
 			if (!actionItem) {
 				throw new Error("Action item not found")
 			}
-
-			// Remove from meeting's actionItems array
-			await Meeting.updateOne(
-				{ actionItems: id },
-				{ $pull: { actionItems: id } }
-			)
 
 			console.log(`✅ Deleted action item: ${id}`)
 		} catch (error: any) {
