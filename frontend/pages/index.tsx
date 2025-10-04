@@ -19,8 +19,8 @@ export default function Home() {
                         <div className="min-h-screen bg-background">
                             <div className=" mx-auto px-6 py-12">
                                 <div className="mb-8">
-                                    <h1 className="text-8xl font-semibold text-foreground mb-2 text-balance tracking-tighter">Meeting Notes</h1>
-                                    <p className="text-muted-foreground">View and manage your meeting summaries and action items</p>
+                                    <h1 className="text-8xl font-semibold text-foreground mb-2 text-balance tracking-tighter">Your Meetings</h1>
+                                    <p className="pl-4 text-muted-foreground">View and manage your meeting summaries and action items</p>
                                 </div>
 
                                 <div className="flex flex-col gap-4">
