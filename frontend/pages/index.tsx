@@ -12,9 +12,6 @@ export default function Home() {
             </Head>
             <main>
                 <div className='min-h-screen min-w-full flex'>
-                    <aside className='w-36 bg-gray-50 shadow-2xs p-6'>
-                        <Navbar />
-                    </aside>
                     <section className='flex-1 p-8'>
                         <div className="min-h-screen bg-background">
                             <div className=" mx-auto px-6 py-12">
