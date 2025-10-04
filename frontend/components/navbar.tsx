@@ -6,18 +6,20 @@ export default function Navbar() {
 
     return (
         <nav className='flex flex-col space-y-2' aria-label="Main navigation">
-            <button
+            <Link
+                href='/'
                 onClick={() => setActiveTab('meetings')}
-                aria-pressed={activeTab === 'meetings'}
-                className={`text-left px-4 py-2 rounded-lg ${activeTab === 'meetings' ? 'bg-white shadow' : 'hover:bg-gray-100'}`}>
-                <Link href="/meetings">Meetings</Link>
-            </button>
-            <button
+                aria-current={activeTab === 'meetings' ? 'page' : undefined}
+                className={`block text-left px-4 py-2 rounded-lg ${activeTab === 'meetings' ? 'bg-white shadow' : 'hover:bg-gray-100'}`}>
+                Meetings
+            </Link>
+            <Link
+                href='/tasks'
                 onClick={() => setActiveTab('tasks')}
-                aria-pressed={activeTab === 'tasks'}
-                className={`text-left px-4 py-2 rounded-lg ${activeTab === 'tasks' ? 'bg-white shadow' : 'hover:bg-gray-100'}`}>
-                <Link href="/tasks">Tasks</Link>
-            </button>
+                aria-current={activeTab === 'tasks' ? 'page' : undefined}
+                className={`block text-left px-4 py-2 rounded-lg ${activeTab === 'tasks' ? 'bg-white shadow' : 'hover:bg-gray-100'}`}>
+                Tasks
+            </Link>
         </nav>
     )
 
