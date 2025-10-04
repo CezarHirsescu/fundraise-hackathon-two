@@ -18,6 +18,12 @@ export default function Navbar() {
                 className={`block text-left px-4 py-2 rounded-lg ${router.pathname === '/tasks' ? 'bg-white shadow' : 'hover:bg-gray-100'}`}>
                 Tasks
             </Link>
+            <Link
+                href='/notetaker'
+                aria-current={router.pathname === '/notetaker' ? 'page' : undefined}
+                className={`block text-left px-4 py-2 rounded-lg ${router.pathname === '/notetaker' ? 'bg-white shadow' : 'hover:bg-gray-100'}`}>
+                Notetaker
+            </Link>
         </nav>
     )
 }
