@@ -81,13 +81,17 @@ export function useUpdateActionItem() {
 	const queryClient = useQueryClient()
 
 	return useMutation({
-		mutationFn: ({ id, data }: { id: string; data: UpdateActionItemData }) =>
-			updateActionItem(id, data),
-		onSuccess: (updatedActionItem) => {
-			// Invalidate specific action item and lists
+		mutationFn: ({ id, data }: { id: string; data: UpdateActionItemData }) => {
+			return updateActionItem(id, data)
+		},
+		onSuccess: () => {
+			// Invalidate all action items queries to refresh the list
 			queryClient.invalidateQueries({
-				queryKey: ["action-items", updatedActionItem._id],
+				queryKey: ["action-items"],
 			})
+		},
+		onError: (error) => {
+			console.error("Failed to update action item:", error)
 		},
 	})
 }
