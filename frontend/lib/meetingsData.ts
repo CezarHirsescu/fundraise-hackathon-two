@@ -7,6 +7,7 @@ export interface Meeting {
   organizationLogo: string
   summary: string
   actionItems: string[]
+  transcript: string
 }
 
 export const meetings: Meeting[] = [
@@ -25,6 +26,9 @@ export const meetings: Meeting[] = [
       "Schedule follow-up meeting for API expansion discussion",
       "Review mobile design mockups next week",
     ],
+    transcript: `Sarah: Let's start with the onboarding flow. We need to reduce time-to-first-value.
+Michael: Agreed — I can evaluate analytics tools that show user funnels.
+You: I'll pull together mobile mockups for next week and share.`
   },
   {
     id: "2",
@@ -41,6 +45,9 @@ export const meetings: Meeting[] = [
       "David to schedule training session for support team",
       "Implement weekly check-in calls during first month",
     ],
+    transcript: `David: The documentation step is slowing us down.
+Emily: We should automate emails for each onboarding phase.
+You: I can help add progress tracking to the portal so clients see updates.`
   },
   {
     id: "3",
@@ -57,6 +64,9 @@ export const meetings: Meeting[] = [
       "Rachel to reach out to potential event partners",
       "Set up tracking dashboard for campaign metrics",
     ],
+    transcript: `Jessica: Our focus is thought leadership and community events.
+Tom: Design will prepare hero assets and social templates.
+Rachel: I'll contact partners and map out event sponsorships.`
   },
   {
     id: "4",
@@ -73,6 +83,9 @@ export const meetings: Meeting[] = [
       "Chris to review and update CI/CD pipeline",
       "Schedule architecture review session for next month",
     ],
+    transcript: `Alex: Migration timing needs to align with release windows.
+Nina: I'll run a performance audit and report hotspots.
+Chris: We'll update CI to include canary deployments during the migration.`
   },
   {
     id: "5",
@@ -89,6 +102,9 @@ export const meetings: Meeting[] = [
       "Schedule individual calls with key investors",
       "Update investor deck with latest product screenshots",
     ],
+    transcript: `Robert: Investors are pleased with growth metrics but want more clarity on runway.
+Linda: We'll prepare case studies highlighting retention improvements.
+You: I'll update the deck and include recent product metrics.`
   },
   {
     id: "6",
@@ -105,6 +121,9 @@ export const meetings: Meeting[] = [
       "Schedule follow-up meeting with legal teams",
       "Prepare pilot program scope and success metrics",
     ],
+    transcript: `Maria: A pilot program will help validate integration value.
+James: We'll scope the technical assessment and identify API touchpoints.
+You: Let's define success metrics so the pilot has clear goals.`
   },
 ]
 

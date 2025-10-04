@@ -4,19 +4,31 @@ import { useState } from "react"
 import { cn } from "@/lib/utils"
 
 interface MeetingTabsProps {
-  summary: string
   actionItems: string[]
+  summary: string
+  transcript: string
 }
 
-type Tab = "summary" | "action-items"
+type Tab = "summary" | "action-items" | "transcript"
 
-export function MeetingTabs({ summary, actionItems }: MeetingTabsProps) {
-  const [activeTab, setActiveTab] = useState<Tab>("summary")
+export function MeetingTabs({ actionItems, summary, transcript }: MeetingTabsProps) {
+  const [activeTab, setActiveTab] = useState<Tab>("action-items")
 
   return (
     <div className="flex flex-col h-full">
       <div className="border-b border-border">
         <div className="flex gap-6 px-6">
+          <button
+            onClick={() => setActiveTab("action-items")}
+            className={cn(
+              "py-4 text-sm font-medium border-b-2 transition-colors",
+              activeTab === "action-items"
+                ? "border-foreground text-foreground"
+                : "border-transparent text-muted-foreground hover:text-foreground",
+            )}
+          >
+            Action Items
+          </button>
           <button
             onClick={() => setActiveTab("summary")}
             className={cn(
@@ -29,15 +41,15 @@ export function MeetingTabs({ summary, actionItems }: MeetingTabsProps) {
             Summary
           </button>
           <button
-            onClick={() => setActiveTab("action-items")}
+            onClick={() => setActiveTab("transcript")}
             className={cn(
               "py-4 text-sm font-medium border-b-2 transition-colors",
-              activeTab === "action-items"
+              activeTab === "transcript"
                 ? "border-foreground text-foreground"
                 : "border-transparent text-muted-foreground hover:text-foreground",
             )}
           >
-            Action Items
+            Transcript
           </button>
         </div>
       </div>
@@ -59,6 +71,12 @@ export function MeetingTabs({ summary, actionItems }: MeetingTabsProps) {
                 <p className="text-sm text-foreground leading-relaxed flex-1">{item}</p>
               </div>
             ))}
+          </div>
+        )}
+
+        {activeTab === "transcript" && (
+          <div className="prose prose-invert max-w-none">
+            <p className="text-foreground leading-relaxed">{transcript}</p>
           </div>
         )}
       </div>
