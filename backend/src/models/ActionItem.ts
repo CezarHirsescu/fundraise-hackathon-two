@@ -15,7 +15,7 @@ const ActionItemSchema: Schema = new Schema(
 	{
 		meetingId: {
 			type: Schema.Types.ObjectId,
-			ref: "Meeting",
+			ref: "Transcript",
 			required: true,
 			index: true,
 		},

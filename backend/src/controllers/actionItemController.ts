@@ -145,10 +145,10 @@ export const createActionItem = async (
 		}
 
 		// Validate status if provided
-		if (status && !["Pending", "Completed"].includes(status)) {
+		if (status && !["To Do", "Pending", "Completed"].includes(status)) {
 			res.status(400).json({
 				success: false,
-				error: "Invalid status. Must be Pending or Completed",
+				error: "Invalid status. Must be To Do, Pending, or Completed",
 			})
 			return
 		}
@@ -196,6 +196,8 @@ export const updateActionItem = async (
 		const { id } = req.params
 		const { status, priority, dueDate, assignee, text } = req.body
 
+		console.log(`📝 Updating action item ${id}:`, { status, priority, dueDate, assignee, text })
+
 		// Check if any updates are provided
 		if (!status && !priority && !dueDate && !assignee && !text) {
 			res.status(400).json({
@@ -208,10 +210,10 @@ export const updateActionItem = async (
 		const updates: any = {}
 
 		if (status) {
-			if (!["Pending", "Completed"].includes(status)) {
+			if (!["To Do", "Pending", "Completed"].includes(status)) {
 				res.status(400).json({
 					success: false,
-					error: "Invalid status. Must be Pending or Completed",
+					error: "Invalid status. Must be To Do, Pending, or Completed",
 				})
 				return
 			}
