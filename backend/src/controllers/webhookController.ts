@@ -442,6 +442,8 @@ async function handleMediaAvailable(data: any): Promise<void> {
 
       await transcript.save();
 
+      
+
       // Emit SSE update for transcript
       emitTranscriptUpdate({
         notetakerId,

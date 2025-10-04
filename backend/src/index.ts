@@ -9,13 +9,19 @@ import sseRoutes from "./routes/sse"
 import meetingRoutes from "./routes/meeting"
 import actionItemRoutes from "./routes/actionItem"
 import { createWebhookManager } from "./services/webhookManager"
+import { initTranscriptWatcher } from "./transcriptWatcher";
 
 dotenv.config()
 
 const app = express()
 
-// Initialize database connection
-connectDB()
+// Initialize database connection and transcript watcher
+const initializeApp = async () => {
+  await connectDB();
+  initTranscriptWatcher();
+};
+
+initializeApp();
 
 // Raw body capture middleware for webhook signature verification - MUST BE FIRST
 app.use(
