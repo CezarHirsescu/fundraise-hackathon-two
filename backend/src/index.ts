@@ -7,6 +7,7 @@ import webhookRoutes from "./routes/webhook"
 import setupRoutes from "./routes/setup"
 import sseRoutes from "./routes/sse"
 import meetingRoutes from "./routes/meeting"
+import aiChatbotRoutes from "./routes/aiChatbot"
 import actionItemRoutes from "./routes/actionItem"
 import { createWebhookManager } from "./services/webhookManager"
 import { initTranscriptWatcher } from "./transcriptWatcher";
@@ -109,6 +110,7 @@ app.use("/api/setup", setupRoutes)
 app.use("/api/sse", sseRoutes)
 app.use("/api/meetings", meetingRoutes)
 app.use("/api/action-items", actionItemRoutes)
+app.use("/api/chat", aiChatbotRoutes)
 
 // Error handling middleware
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {

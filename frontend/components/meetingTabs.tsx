@@ -19,7 +19,7 @@ export function MeetingTabs({
 	transcript,
 	isLoadingActionItems,
 }: MeetingTabsProps) {
-	const [activeTab, setActiveTab] = useState<Tab>("action-items")
+	const [activeTab, setActiveTab] = useState<Tab>("summary")
 
 	return (
 		<div className="flex flex-col h-full">

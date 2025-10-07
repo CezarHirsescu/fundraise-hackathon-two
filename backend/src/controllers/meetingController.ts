@@ -22,10 +22,19 @@ export const getMeetings = async (
 			.sort({ createdAt: -1 })
 			.lean()
 
+		// Map Transcript fields to Meeting interface
+		const meetings = transcripts.map((transcript: any) => ({
+			...transcript,
+			summary: transcript.summaryText, // Map summaryText to summary
+			title: transcript.sessionId?.name || transcript.sessionId?.meetingLink || "Untitled Meeting",
+			date: transcript.createdAt,
+			duration: transcript.duration || 0,
+		}))
+
 		res.json({
 			success: true,
-			data: transcripts,
-			count: transcripts.length,
+			data: meetings,
+			count: meetings.length,
 		})
 	} catch (error: any) {
 		console.error("Error in getMeetings:", error.message)
@@ -68,9 +77,18 @@ export const getMeeting = async (
 			return
 		}
 
+		// Map Transcript fields to Meeting interface
+		const meeting = {
+			...transcript,
+			summary: (transcript as any).summaryText, // Map summaryText to summary
+			title: (transcript as any).sessionId?.name || (transcript as any).sessionId?.meetingLink || "Untitled Meeting",
+			date: (transcript as any).createdAt,
+			duration: (transcript as any).duration || 0,
+		}
+
 		res.json({
 			success: true,
-			data: transcript,
+			data: meeting,
 		})
 	} catch (error: any) {
 		console.error("Error in getMeeting:", error.message)
@@ -89,3 +107,5 @@ export const getMeeting = async (
 		})
 	}
 }
+
+

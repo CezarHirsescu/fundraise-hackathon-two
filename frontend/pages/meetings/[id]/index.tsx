@@ -18,8 +18,11 @@ export default function MeetingDetailsPage() {
 		isLoading: meetingLoading,
 		error: meetingError,
 	} = useMeeting(meetingId)
-	const { data: actionItems, isLoading: actionItemsLoading } =
-		useActionItemsByMeeting(meetingId)
+
+	const { data: actionItems, isLoading: actionItemsLoading } = useActionItemsByMeeting(meetingId)
+
+    console.log('Meeting:'  , meeting)
+    console.log('actionItems:', actionItems)
 
 	if (meetingLoading) {
 		return (

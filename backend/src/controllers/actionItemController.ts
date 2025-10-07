@@ -99,7 +99,7 @@ export const getActionItemsByMeeting = async (
 		const actionItems = await actionItemService.getActionItemsByMeeting(
 			meetingId as string
 		)
-
+        console.log('Action items controller:', actionItems)
 		res.json({
 			success: true,
 			data: actionItems,
